@@ -44,14 +44,27 @@ const Hero = () => {
 		const startValue = isMobile ? 'top 50%' : 'center 60%';
 		const endValue = isMobile ? '120% top' : 'bottom top';
 
-		gsap.timeline({
+		const videoTimeline = gsap.timeline({
 			scrollTrigger: {
-				trigger: '#hero',
+				trigger: 'video',
 				start: startValue,
 				end: endValue,
 				scrub: true,
+				pin: true,
+				// onEnter: () => videoRef.current.play(),
+				// onLeave: () => videoRef.current.pause(),
+				// onEnterBack: () => videoRef.current.pause(),
+				// onLeaveBack: () => videoRef.current.play(),
 			},
 		});
+
+		videoRef.current.onloadedmetadata = () => {
+			videoTimeline.to(videoRef.current, {
+				currentTime: videoRef.current.duration,
+				duration: videoRef.current.duration,
+				ease: 'none',
+			});
+		};
 	}, []);
 
 	return (
@@ -93,8 +106,12 @@ const Hero = () => {
 				</div>
 			</section>
 			<div className="video absolute inset-0">
+				{/*Ver la diferencia entre los vides input.mp4 y output.mp4 se
+				usó software FFmpeg para generar output.mp4: ffmpeg -i input.mp4
+				-vf scale=960:-1 -movflgas faststart -vcodec libx264 -crf 20 -g
+				1 -pix_fmt yuv420p output.mp4*/}
 				<video
-					src="/videos/input.mp4"
+					src="/videos/output.mp4"
 					muted
 					playsInline
 					preload="auto"
