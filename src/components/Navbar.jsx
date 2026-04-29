@@ -16,7 +16,6 @@ export const Navbar = () => {
 			{ backgroundColor: 'transparent' },
 			{
 				backdropFilter: 'blur(10px)',
-				backgroundFilter: 'blur(10px)',
 				duration: 1,
 				ease: 'power2.out',
 			},
