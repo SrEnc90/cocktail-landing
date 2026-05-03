@@ -85,7 +85,7 @@ body {
 	}
 
 	.noisy {
-		@apply absolute inset-0 size-full bg-[url("/images/noise.png")] pointer-events-none;
+		@apply absolute inset-0 size-full bg-[url("/images/noise.png")];
 	}
 
 	#hero {
@@ -185,7 +185,7 @@ body {
 	}
 
 	#about {
-		@apply min-h-screen py-28 2xl:px-0 px-5 container mx-auto;
+		@apply min-h-screen py-28 2xl:px-0 px-5 container mx-auto overflow-hidden;
 
 		.content {
 			@apply grid grid-cols-1 lg:grid-cols-12 gap-5;

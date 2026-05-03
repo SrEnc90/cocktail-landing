@@ -9,7 +9,7 @@ const Hero = () => {
 	const isMobile = useMediaQuery({ maxWidth: 768 });
 	useGSAP(() => {
 		const heroSplit = SplitText.create('.title', {
-			type: 'chars, words',
+			type: 'chars',
 		});
 		const paragraphSplit = SplitText.create('.subtitle', {
 			type: 'lines',
@@ -51,20 +51,22 @@ const Hero = () => {
 				end: endValue,
 				scrub: true,
 				pin: true,
-				// onEnter: () => videoRef.current.play(),
-				// onLeave: () => videoRef.current.pause(),
-				// onEnterBack: () => videoRef.current.pause(),
-				// onLeaveBack: () => videoRef.current.play(),
 			},
 		});
 
-		videoRef.current.onloadedmetadata = () => {
+		const setupVideoAnimation = () => {
 			videoTimeline.to(videoRef.current, {
 				currentTime: videoRef.current.duration,
 				duration: videoRef.current.duration,
 				ease: 'none',
 			});
 		};
+
+		if (videoRef.current.readyState >= 1) {
+			setupVideoAnimation();
+		} else {
+			videoRef.current.onloadedmetadata = setupVideoAnimation;
+		}
 	}, []);
 
 	return (
