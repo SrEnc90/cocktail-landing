@@ -22,13 +22,17 @@ const About = () => {
 				ease: 'power2.out',
 				stagger: 0.1,
 			})
-			.from('.top-grid div, .bottom-grid div', {
-				opacity: 0,
-				duration: 1,
-				yPercent: 100,
-				ease: 'power2.out',
-				stagger: 0.1,
-			});
+			.from(
+				'.top-grid div, .bottom-grid div',
+				{
+					opacity: 0,
+					duration: 1,
+					yPercent: 100,
+					ease: 'power2.out',
+					stagger: 0.1,
+				},
+				'-=0.5',
+			);
 	});
 
 	return (
